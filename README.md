@@ -1,5 +1,8 @@
 # DinoNotify
 
+[![GitHub release](https://img.shields.io/github/v/release/ukritfongsomboon/DinoNotify?label=version)](https://github.com/ukritfongsomboon/DinoNotify/releases)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ukritfongsomboon/DinoNotify.svg)](https://pkg.go.dev/github.com/ukritfongsomboon/DinoNotify)
+
 A Go notification library that supports multiple providers: **LINE Messaging API**, **Slack**, and **Discord**.
 
 ---
