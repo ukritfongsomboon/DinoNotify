@@ -29,10 +29,9 @@ func (s Severity) emoji() string {
 }
 
 type MessagePayload struct {
-	Severity Severity `json:"severity"`
-	Title    string   `json:"title"`
-	Subtitle string   `json:"subtitle"`
-	Message  string   `json:"message"`
+	Title    string `json:"title"`
+	Subtitle string `json:"subtitle"`
+	Message  string `json:"message"`
 }
 
 type FileType string
