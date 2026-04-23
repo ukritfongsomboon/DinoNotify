@@ -31,23 +31,19 @@ func NewDiscordProvider(webhookURL string) ProviderMessage {
 }
 
 func (d discordMessage) Info(message MessagePayload) error {
-	message.Severity = SeverityInfo
-	return d.send(message)
+	return d.send(SeverityInfo, message)
 }
 
 func (d discordMessage) Error(message MessagePayload) error {
-	message.Severity = SeverityError
-	return d.send(message)
+	return d.send(SeverityError, message)
 }
 
 func (d discordMessage) Success(message MessagePayload) error {
-	message.Severity = SeveritySuccess
-	return d.send(message)
+	return d.send(SeveritySuccess, message)
 }
 
 func (d discordMessage) Warning(message MessagePayload) error {
-	message.Severity = SeverityWarning
-	return d.send(message)
+	return d.send(SeverityWarning, message)
 }
 
 func (d discordMessage) SendFile(file FilePayload) error {
@@ -60,10 +56,10 @@ func (d discordMessage) SendFile(file FilePayload) error {
 	return d.push(discordPayload{Embeds: []discordEmbed{embed}})
 }
 
-func (d discordMessage) send(message MessagePayload) error {
+func (d discordMessage) send(severity Severity, message MessagePayload) error {
 	return d.push(discordPayload{
 		Embeds: []discordEmbed{
-			{Description: FormatMessage(message), Color: severityColorDiscord(message.Severity)},
+			{Description: FormatMessage(severity, message), Color: severityColorDiscord(severity)},
 		},
 	})
 }
