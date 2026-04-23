@@ -42,23 +42,19 @@ func NewSlackProvider(webhookURL string) ProviderMessage {
 }
 
 func (s slackMessage) Info(message MessagePayload) error {
-	message.Severity = SeverityInfo
-	return s.send(message)
+	return s.send(SeverityInfo, message)
 }
 
 func (s slackMessage) Error(message MessagePayload) error {
-	message.Severity = SeverityError
-	return s.send(message)
+	return s.send(SeverityError, message)
 }
 
 func (s slackMessage) Success(message MessagePayload) error {
-	message.Severity = SeveritySuccess
-	return s.send(message)
+	return s.send(SeveritySuccess, message)
 }
 
 func (s slackMessage) Warning(message MessagePayload) error {
-	message.Severity = SeverityWarning
-	return s.send(message)
+	return s.send(SeverityWarning, message)
 }
 
 func (s slackMessage) SendFile(file FilePayload) error {
@@ -74,10 +70,10 @@ func (s slackMessage) SendFile(file FilePayload) error {
 	return s.push(slackPayload{Blocks: []any{block}})
 }
 
-func (s slackMessage) send(message MessagePayload) error {
+func (s slackMessage) send(severity Severity, message MessagePayload) error {
 	return s.push(slackPayload{
 		Attachments: []slackAttachment{
-			{Color: severityColor(message.Severity), Text: FormatMessage(message)},
+			{Color: severityColor(severity), Text: FormatMessage(severity, message)},
 		},
 	})
 }
