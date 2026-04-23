@@ -237,4 +237,4 @@ DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
 
 ## License
 
-MIT License — © 2026 Ukrit Fongsomboon
+Released under the MIT License. Copyright (c) 2026 Ukrit Fongsomboon.
