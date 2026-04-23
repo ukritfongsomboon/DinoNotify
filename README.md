@@ -213,3 +213,9 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx/yyy/zzz
 
 DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
 ```
+
+---
+
+## License
+
+MIT License — © 2026 Ukrit Fongsomboon
