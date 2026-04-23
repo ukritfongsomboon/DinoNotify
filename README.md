@@ -90,27 +90,43 @@ discord := dinonotify.NewDiscordProvider(
 
 ### Text Message
 
-ทุก provider รองรับ 4 ระดับ severity:
+ทุก provider รองรับ 4 ระดับ severity โดย `MessagePayload` มี 3 field:
 
+| Field | คำอธิบาย |
+|-------|----------|
+| `Title` | หัวข้อหลัก เช่น ชื่อ project หรือ service |
+| `Subtitle` | หัวข้อรอง เช่น environment หรือ stage |
+| `Message` | รายละเอียดของเหตุการณ์ |
+
+**Info** — แจ้งสถานะทั่วไป เช่น service เริ่มทำงาน
 ```go
 provider.Info(dinonotify.MessagePayload{
     Title:    "Project : worker-job",
     Subtitle: "Stage   : UAT",
     Message:  "Service started successfully",
 })
+```
 
+**Warning** — เตือนเหตุการณ์ที่อาจส่งผลกระทบ แต่ยังไม่ถึงขั้น error
+```go
 provider.Warning(dinonotify.MessagePayload{
     Title:    "Project : worker-job",
     Subtitle: "Stage   : UAT",
     Message:  "Queue delay > 10s",
 })
+```
 
+**Error** — แจ้งข้อผิดพลาดที่เกิดขึ้นในระบบ
+```go
 provider.Error(dinonotify.MessagePayload{
     Title:    "Project : Payment API",
     Subtitle: "Stage   : UAT",
     Message:  "Cannot connect to PostgreSQL on port 5432",
 })
+```
 
+**Success** — แจ้งเมื่อการทำงานสำเร็จหรือระบบกลับมาปกติ
+```go
 provider.Success(dinonotify.MessagePayload{
     Title:    "Project : worker-job",
     Subtitle: "Stage   : UAT",
