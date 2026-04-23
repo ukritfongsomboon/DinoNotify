@@ -44,23 +44,19 @@ func NewLineMessageAPIProvider(channelAccessToken string, to string) ProviderMes
 }
 
 func (l lineMessage) Info(message MessagePayload) error {
-	message.Severity = SeverityInfo
-	return l.send(message)
+	return l.send(SeverityInfo, message)
 }
 
 func (l lineMessage) Error(message MessagePayload) error {
-	message.Severity = SeverityError
-	return l.send(message)
+	return l.send(SeverityError, message)
 }
 
 func (l lineMessage) Success(message MessagePayload) error {
-	message.Severity = SeveritySuccess
-	return l.send(message)
+	return l.send(SeveritySuccess, message)
 }
 
 func (l lineMessage) Warning(message MessagePayload) error {
-	message.Severity = SeverityWarning
-	return l.send(message)
+	return l.send(SeverityWarning, message)
 }
 
 func (l lineMessage) SendFile(file FilePayload) error {
@@ -91,8 +87,8 @@ func isImageURL(url string) bool {
 	return false
 }
 
-func (l lineMessage) send(message MessagePayload) error {
-	return l.push(lineTextMessage{Type: "text", Text: FormatMessage(message)})
+func (l lineMessage) send(severity Severity, message MessagePayload) error {
+	return l.push(lineTextMessage{Type: "text", Text: FormatMessage(severity, message)})
 }
 
 func (l lineMessage) push(msg any) error {
